@@ -1,0 +1,52 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a[50], key, n, flag = 0;
+    cout << "Enter the value of Key :";
+    cin >> key;
+    cout << "Enter how many number you want to add in array";
+    cin >> n;
+    // Taking the input from user
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    // Algorithm on Binary Search operation.
+        int start = 0, end = n - 1, mid;
+    for (int i = 0; i < n; i++)
+    {
+        mid = (start + end) / 2;
+        // cout << mid << endl;
+        if (a[mid] == key)
+        {
+            flag = 1;
+            break;
+        }
+        else if (a[mid] > key)
+        {
+            end = mid;
+        }
+        else if (end < start)
+        {
+            break;
+        }
+        else
+        {
+            start = mid ;
+        }
+    }
+    // Constructing the statement which is number is present inside the array or not.
+    if (flag == 1)
+    {
+        cout << "The Number is found inside the array.";
+    }
+    else
+    {
+        cout << "The is not found inside the array.";
+    }
+
+    return 0;
+}
