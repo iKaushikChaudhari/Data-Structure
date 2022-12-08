@@ -1,0 +1,100 @@
+//Stack using Linked List
+#include <stdio.h>
+#include <stdlib.h>
+void PushFun();
+void PopFun();
+void DisplayFun();
+struct Node
+{
+    int Data;
+    struct Node *Next;
+}*Top = NULL;
+
+int main()
+{
+    int choice;
+    struct Node *temp;
+    while (1)
+    {
+        printf("\n<-----Menu----->");
+        printf("\n1.Push\n2.Pop\n3.Show\n4.End");
+        printf("\n\nEnter the choice:");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            PushFun();
+            break;
+        case 2:
+            PopFun();
+            break;
+        case 3:
+            DisplayFun(Top);
+            break;
+        case 4:
+            exit(0);
+
+        default:
+            printf("\nInvalid choice!!");
+        }
+    }
+    return 0;
+}
+void PushFun()
+{
+    struct Node *temp;
+    temp = Top;
+    int n;
+    printf("Enter the Element :");
+    scanf("%d", &n);
+
+    if (temp == NULL)
+    {
+        temp = (struct Node *)malloc(sizeof(struct Node));
+        temp->Data = n;
+        temp->Next = NULL;
+        Top = temp;
+    }
+    else
+    {
+        temp = (struct Node *)malloc(sizeof(struct Node));
+        temp->Data = n;
+        temp->Next = Top;
+        Top = temp;
+    }
+}
+
+void DisplayFun(struct Node *p)
+{
+    struct Node *temp;
+    temp = p;
+    if (p == NULL)
+    {
+        printf("Stack is Empty!!");
+    }
+    else
+    {
+        while (p != NULL)
+        {
+            printf("%d\n", p->Data);
+            p = p->Next;
+        }
+    }
+}
+
+void PopFun()
+{
+    struct Node *temp;
+    temp = Top;
+    if (temp == NULL)
+    {
+        printf("Stack is Empty!!");
+    }
+    else
+    {
+        printf("%d is Popped", Top->Data);
+        Top = Top->Next;
+        free(temp);
+    }
+}
