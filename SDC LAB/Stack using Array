@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int top = 0, s[4];
+void PushFun();
+void PopFun();
+void DisplayFun();
+
+int main()
+{
+	int choice;
+
+	while (1)
+	{
+		printf("\n<-----Menu----->");
+		printf("\n1.Push\n2.Pop\n3.Show\n4.End");
+		printf("\n\nEnter the choice:");
+		scanf("%d", &choice);
+
+		switch (choice)
+		{
+		case 1:
+			PushFun();
+			break;
+		case 2:
+			PopFun();
+			break;
+		case 3:
+			DisplayFun();
+			break;
+		case 4:
+			exit(0);
+
+		default:
+			printf("\nInvalid choice!!");
+		}
+	}
+}
+
+void PushFun()
+{
+	int x;
+
+	if (top == 4)
+	{
+		printf("\nOverflow!!");
+	}
+	else
+	{
+		printf("\nEnter element:");
+		scanf("%d", &x);
+		s[top] = x;
+		top++;
+	}
+}
+
+void PopFun()
+{
+	if (top == 0)
+	{
+		printf("\nEmpty Stack!!");
+	}
+	else
+	{
+		printf("\nPopped element:  %d", s[top - 1]);
+		top = top - 1;
+	}
+}
+
+void DisplayFun()
+{
+
+	if (top == 0)
+	{
+		printf("\nEmpty Stack!!");
+	}
+	else
+	{
+		printf("\nElements present in the stack: \n");
+		for (int i = top - 1; i >= 0; i--)
+			printf("%d\n", s[i]);
+	}
+}
