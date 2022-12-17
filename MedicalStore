@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-// Struct for Item
+
 struct Item
 {
     char Name_m[30], Use[5][20], Ex_Date[5];
@@ -25,7 +25,8 @@ void Search_Item(struct Item *, int);
 void Stock_Detail();
 void Cart();
 void Push();
-void Display_Cart();
+void Display_Cart(struct Bill *);
+void Bill();
 // Main Function
 int main()
 {
@@ -191,7 +192,7 @@ void Search_Item(struct Item *p, int key)
 }
 void Stock_Detail()
 {
-    void Update_stock(struct Item *);
+    void Update_stock(struct Item *, int);
     void Less_Stock(struct Item *);
     printf("\n\n<-----------Stock Detail---------->\n\n");
     printf("1)Update Stock\n");
@@ -208,6 +209,9 @@ void Stock_Detail()
         break;
     case 2:
         Add_Item();
+        break;
+    case 3:
+        Less_Stock(Head_Item);
         break;
     default:
         break;
@@ -251,13 +255,13 @@ void Less_Stock(struct Item *ptr)
     {
         if (ptr->Quantity < 20)
         {
-            printf("Name :%s\n", p->Name_m);
-            printf("Price :%f\n", p->Price_m);
-            printf("Quantity :%d\n", p->Quantity);
+            printf("Name :%s\n", ptr->Name_m);
+            printf("Price :%f\n", ptr->Price_m);
+            printf("Quantity :%d\n", ptr->Quantity);
             printf("Use :\n");
             for (int i = 0; i < 5; i++)
             {
-                printf("%s\t", p->Use[i]);
+                printf("%s\t", ptr->Use[i]);
             }
             
         }
@@ -267,9 +271,9 @@ void Less_Stock(struct Item *ptr)
 // void Expire_Item()
 void Bill()
 {
-      void Push();
-      void Display_Cart();
-    int Product_ID, choice_bill, choice_bill, choice_product,customer_quantity;
+    //   void Push();
+    //   void Display_Cart(struct Bill *);
+    int Product_ID, choice_bill, choice_product,customer_quantity;
     do
     {
         printf("<----------Cart---------->\n");
@@ -279,7 +283,7 @@ void Bill()
         {
         case 1:
             printf("Enter the Product ID :");
-            scanf("%d", choice_product);
+            scanf("%d", &choice_product);
             printf("Enter the Quantity :");
             scanf("%d",&customer_quantity);
             Push(Head_Item, choice_product,customer_quantity);
@@ -333,7 +337,7 @@ void Push(struct Item *Item_ptr, int choice_product, int Customer_quantity)
         printf("Data is not Found.");
     }
 }
-void DisplayFun(struct Bill *p)
+void Display_Cart(struct Bill *p)
 {
     struct Bill *temp;
     float Productwise_total;
